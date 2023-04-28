@@ -1,0 +1,27 @@
+{% extends "base.html" %}
+
+{% block content %}
+  <h1>
+    {{ task.title }}
+  </h1>
+  <br>
+  <div>{{ task.content }}</div>
+  <br>
+  <div>
+    <span><strong>Created:</strong> {{ task.creation_date }}</span>
+  {% if task.deadline %}
+    <br>
+    <span><strong>Deadline:</strong> {{ task.deadline }}</span>
+  {% endif %}
+  </div>
+  <br>
+  <div>
+    <a href="{% url 'core:task-update' pk=task.id %}" class="btn btn-warning">
+      Update
+    </a>
+    <a href="{% url 'core:task-delete' pk=task.id %}" class="btn btn-danger">
+      Delete
+    </a>
+  </div>
+
+{% endblock %}

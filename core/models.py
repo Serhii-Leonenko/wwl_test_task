@@ -9,4 +9,4 @@ class Task(models.Model):
     is_done = models.BooleanField(default=False)
 
     class Meta:
-        ordering = ["is_done", "-creation_date"]
+        ordering = ["-creation_date"]

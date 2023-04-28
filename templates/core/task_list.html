@@ -4,17 +4,18 @@
 
     <h1>
         TASKS
-        <a style="float: right" class="btn btn-primary btn-lg" href="{% url 'core:task-create' %}">
-            Add task
-        </a>
     </h1>
     <br>
     {% if task_list %}
         {% for task in task_list %}
+          {% if task.is_done %}
+          <div style="background-color: lightgreen; border-radius: 10px" >
+          {% else %}
+          <div>
+          {% endif %}
             <p>
-                <strong>{{ task.content }}
+                <strong><a href="{% url 'core:task-detail' pk=task.id %}"><h3>{{ task.title }}</h3></a>
                     {% if task.is_done %}
-                        <span class="text-success"> Done</span>
                         <a style="float: right" class="btn btn-secondary" href="{% url 'core:task-status-change' pk=task.id %}">Undo</a>
                     {% else %}
                         <span class="text-danger"> Not done</span>
@@ -25,19 +26,17 @@
             <p>
                 Created: {{ task.creation_date }}
                 {% if task.deadline %}
-                    <span style="color: mediumpurple">Deadline: {{ task.deadline }}</span>
+                  <br>
+                    <span style="color: orangered">Deadline: {{ task.deadline }}</span>
                 {% endif %}
             </p>
             <p>
-                <span class="text-muted">
-                    Tags:
-
-                </span>
-                <a href="{% url 'core:task-update' pk=task.id %}">Update</a>
+                <a href="{% url 'core:task-update' pk=task.id %}" class="badge badge-warning">Update</a>
                 |
-                <a href="{% url 'core:task-delete' pk=task.id %}">Delete</a>
+                <a href="{% url 'core:task-delete' pk=task.id %}" class="badge badge-danger">Delete</a>
             </p>
             <hr>
+          </div>
         {% endfor %}
 
     {% else %}

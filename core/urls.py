@@ -5,7 +5,7 @@ from core.views import (
     TaskUpdateView,
     TaskCreateView,
     TaskDeleteView,
-    task_status_change,
+    task_status_change, TaskDetailView,
 )
 
 urlpatterns = [
@@ -13,6 +13,7 @@ urlpatterns = [
     path("create/", TaskCreateView.as_view(), name="task-create"),
     path("<int:pk>/update/", TaskUpdateView.as_view(), name="task-update"),
     path("<int:pk>/delete/", TaskDeleteView.as_view(), name="task-delete"),
+    path("<int:pk>/", TaskDetailView.as_view(), name="task-detail"),
     path("<int:pk>/change_status/", task_status_change, name="task-status-change"),
 ]
 
