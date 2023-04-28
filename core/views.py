@@ -1,3 +1,4 @@
+from django.contrib.auth.decorators import login_required
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.http import HttpResponseRedirect
 from django.urls import reverse_lazy, reverse
@@ -34,6 +35,7 @@ class TaskDeleteView(LoginRequiredMixin, generic.DeleteView):
     success_url = reverse_lazy("core:task-list")
 
 
+@login_required
 def task_status_change(request, pk):
     task = Task.objects.get(id=pk)
     if task.is_done:
